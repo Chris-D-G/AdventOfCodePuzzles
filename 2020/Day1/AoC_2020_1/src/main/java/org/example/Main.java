@@ -9,10 +9,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> list = loadData("input.txt");
+        Scanner input = new Scanner(System.in);
+        System.out.print("Type filepath to load: ");
+        String filepath = input.nextLine().toLowerCase().trim();
+        List<Integer> list = loadData(filepath);
         if(list != null){
-            System.out.println("Part 1 Multiplicand = "+sumTwoGiveMultiplicand(list, 2020));
-            System.out.println("Part 2 Multiplicand = "+sumThreeGiveMultiplicand(list, 2020));
+            System.out.print("\nProvide required sum to find factors for: ");
+            int response = Integer.parseInt(input.nextLine());
+            System.out.println("Part 1 Multiplicand = "+sumTwoGiveMultiplicand(list, response));
+            System.out.println("Part 2 Multiplicand = "+sumThreeGiveMultiplicand(list, response));
         }
 
     }
