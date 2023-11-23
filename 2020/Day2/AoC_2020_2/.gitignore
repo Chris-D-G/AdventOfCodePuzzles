@@ -3,9 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 input.txt
-
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
