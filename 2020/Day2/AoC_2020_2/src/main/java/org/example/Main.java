@@ -8,18 +8,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int validPasswordCount = 0;
+        int validPasswordCountPart1 = 0;
+        int validPasswordCountPart2 = 0;
         File inputFile = new File("input.txt");
         try{
-            int lineCount=1;
             Scanner fileReader = new Scanner(inputFile);
             while(fileReader.hasNext()){
-                System.out.println("Trying line #: "+lineCount);
                 Map<String,String> map = createPasswordMap(fileReader.nextLine());
-                System.out.println("Mapped line #: "+lineCount);
-                lineCount++;
-                if(checkPasswordValidity(map)){
-                    validPasswordCount++;
+                if(checkPasswordValidityPart1(map)){
+                    validPasswordCountPart1++;
+                };
+                if(checkPasswordValidityPart2(map)){
+                    validPasswordCountPart2++;
                 };
             }
         }catch (FileNotFoundException e){
@@ -27,16 +27,17 @@ public class Main {
         }catch (Exception e){
             System.out.println("Something else went wrong!\n" + e.getMessage());
         }
-        System.out.println("Valid password count is: "+ validPasswordCount);
+        System.out.println("Valid password count for part 1 is: "+ validPasswordCountPart1);
+        System.out.println("Valid password count for part 2 is: "+ validPasswordCountPart2);
     }
 
 
 
     private static Map<String,String> createPasswordMap(String inputString){
         Map<String,String> map = new HashMap<>();
-        String min = String.valueOf(inputString.charAt(0));
-        String max = String.valueOf(inputString.charAt(2));
-        String searchParameter = String.valueOf(inputString.charAt(4));
+        String min = inputString.substring(0,inputString.indexOf("-"));
+        String max = inputString.substring(inputString.indexOf("-")+1,inputString.indexOf(" ") );
+        String searchParameter =inputString.substring(inputString.indexOf(":")-1,inputString.indexOf(":"));
         String password = inputString.substring(inputString.indexOf(": ")+2).trim();
         map.put("min",min);
         map.put("max",max);
@@ -44,7 +45,7 @@ public class Main {
         map.put("password",password);
         return map;
     }
-    private static boolean checkPasswordValidity(Map<String,String> passwordMap){
+    private static boolean checkPasswordValidityPart1(Map<String,String> passwordMap){
         int min = Integer.parseInt(passwordMap.get("min"));
         int max = Integer.parseInt(passwordMap.get("max"));
         String searchParam = passwordMap.get("search");
@@ -58,6 +59,13 @@ public class Main {
         return count >= min && count <= max;
     }
 
+    public static boolean checkPasswordValidityPart2(Map<String,String> passwordMap){
+        int position1 = Integer.parseInt(passwordMap.get("min")) - 1;
+        int position2 = Integer.parseInt(passwordMap.get("max")) - 1;
+        String searchParam = passwordMap.get("search");
+        String password = passwordMap.get("password");
+        return String.valueOf(password.charAt(position1)).equals(searchParam) ^ String.valueOf(password.charAt(position2)).equals(searchParam) ;
+    }
 
 
 }
