@@ -18,6 +18,9 @@ public class Main {
             int response = Integer.parseInt(input.nextLine());
             System.out.println("Part 1 Multiplicand = "+sumTwoGiveMultiplicand(list, response));
             System.out.println("Part 2 Multiplicand = "+sumThreeGiveMultiplicand(list, response));
+            System.out.println("Recursive Method output: "+ recursiveMethod(list,response,0));
+
+
         }
 
     }
@@ -91,6 +94,24 @@ public class Main {
         }
         return thirdFactor * innerMultiplicand;
     }
+
+    private static long recursiveMethod(List<Long> numList, long requiredSum, int currentIndex){
+        long firstFactor = numList.get(currentIndex);
+        if(currentIndex>= numList.size()){
+            return 0L;
+        }
+        // based on principle that sum = number1 + (sum - number1)
+        long summingPartner = requiredSum - firstFactor;
+        if( numList.contains(summingPartner) ){
+            System.out.println("1st Factor = " + firstFactor + "\n2nd Factor = " + summingPartner);
+            return firstFactor*summingPartner;
+        }else{
+         return recursiveMethod(numList,requiredSum,currentIndex+1);
+        }
+
+    }
+
+
 
 
 }
