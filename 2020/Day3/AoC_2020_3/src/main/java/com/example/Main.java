@@ -60,7 +60,7 @@ public class Main {
      * Counts the numbers of tree found by traversing the provided location
      * map at the specified horizontal and vertical movement
      *
-     * @param asciiMap list of string representing the location of trees and open spaces
+     * @param asciiMap list of strings representing the location of trees and open spaces
      * @param xTraversal horizontal movement
      * @param yTraversal vertical movement
      * @return number of trees found for the provided map
@@ -68,7 +68,7 @@ public class Main {
     public static long countTrees(List<String> asciiMap,int xTraversal, int yTraversal){
         long treeCount = 0;
         int position = xTraversal;
-        for(int i =1; i<asciiMap.size();i+=yTraversal){
+        for(int i =yTraversal; i<asciiMap.size();i+=yTraversal){
             if(checkForTree(asciiMap.get(i),position)){
                 treeCount++;
             }
