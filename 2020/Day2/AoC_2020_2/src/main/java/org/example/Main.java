@@ -32,7 +32,13 @@ public class Main {
     }
 
 
-
+    /**
+     * Method that extracts the components of an input string needed to validating
+     * a password
+     * @param inputString string to extract components from
+     * @return a Map containing the min, and max count of the search parameter along
+     * with password to validate
+     */
     private static Map<String,String> createPasswordMap(String inputString){
         Map<String,String> map = new HashMap<>();
         String min = inputString.substring(0,inputString.indexOf("-"));
@@ -45,6 +51,13 @@ public class Main {
         map.put("password",password);
         return map;
     }
+
+    /**
+     * Method to determine if the provided password is valid using the search
+     * parameter and min/max counts
+     * @param passwordMap a map containing the components needed to determine validity
+     * @return boolean representing a valid password
+     */
     private static boolean checkPasswordValidityPart1(Map<String,String> passwordMap){
         int min = Integer.parseInt(passwordMap.get("min"));
         int max = Integer.parseInt(passwordMap.get("max"));
@@ -59,6 +72,13 @@ public class Main {
         return count >= min && count <= max;
     }
 
+    /**
+     * Method to determine if a provided password is valid using the
+     * search parameters and the positions to check
+     *
+     * @param passwordMap a map containing the components needed to determine validity
+     * @return boolean representing a valid password
+     */
     public static boolean checkPasswordValidityPart2(Map<String,String> passwordMap){
         int position1 = Integer.parseInt(passwordMap.get("min")) - 1;
         int position2 = Integer.parseInt(passwordMap.get("max")) - 1;
