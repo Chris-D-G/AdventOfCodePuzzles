@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 input.txt
 test.txt
+test2.txt
 
 ### IntelliJ IDEA ###
 .idea/
